@@ -34,4 +34,10 @@ Bajar_Precios <- function(Columns, Tickers, Fecha_In, Fecha_Fn) {
 tk <- c("TSLA", "BBY", "HD")
 cs <- c("date", "adj_close")
 #fecha inicial y final
-fs <- 
+fs <- c("2015-08-01", "2016-08-01")
+# DESCARGAR PRECIOS NY CALCULAR REND
+Datos <- list()
+for (i in 1:length(tk)){
+  Datos[[i]] <- Bajar_Precios(Columns=cs, Tickers=tk[i], Fecha_In = fs[1], Fecha_Fn = fs[2])
+}
+names(Datos) <- tk
