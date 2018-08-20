@@ -30,3 +30,8 @@ Bajar_Precios <- function(Columns, Tickers, Fecha_In, Fecha_Fn) {
                             date.gte=Fecha_In, date.lte=Fecha_Fn)
   return(Datos)
 }
+#tickers de accione sy datos a solicitar de QUANDL
+tk <- c("TSLA", "BBY", "HD")
+cs <- c("date", "adj_close")
+#fecha inicial y final
+fs <- 
