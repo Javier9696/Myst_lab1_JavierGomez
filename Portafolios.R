@@ -37,7 +37,7 @@ Bajar_Precios <- function(Columns, Tickers, Fecha_In, Fecha_Fn) {
 # Tickers de accciones y datos a solicitar a QUANDL
 tk <- c("TSLA", "BBY", "HD")
 cs <- c("date", "adj_close")
-
+Capital_Inicial <- 10000
 # Fecha inicial y fecha final
 fs <- c("2015-08-01", "2017-08-01")
 
@@ -73,4 +73,14 @@ for (i in 1:length(Port1$random_portfolio_objective_results)){
 }
 df_Portafolios <- data.frame(matrix(nrow=length(Port1$random_portfolio_objective_results),ncol=3, data=0))
 colnames(df_Portafolios) <- c("Rend", "Var", "Clase")
+for (i in 1:length(Port1$random_portfolio_objective_results)){
+  df_Portafolios$Rend[i] <- round(Portafolios[[i]]$Medias*252,4)
+  df_Portafolios$Var[i] <- round(sqrt(Portafolios[[i]]$Vars)*sqrt(252),4)
+  df_Portafolios$Clase[i] <- "No Frontera"
+for(k in 1:length(tk)){
+  df_Portafolios[i,paste("Peso_",tk[k],sep="")] <- Portafolios[[i]]$Pesos[k]
+  df_Portafolios[i,paste("Titulos_ini_", tk[k], sep="")] <-
+    (Capital_Inicial*Portafolios[[i]]$Pesos[k])%/%Datos[[k]]$adj_close[1]
+  }
+}
 
